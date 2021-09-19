@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:health_code/liffecycle_event_handler.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -12,7 +13,26 @@ class _AppState extends State<App> {
   final Uri _url =
       Uri.parse('https://app.ssm.gov.mo/healthPHD/page/index.html');
   late InAppWebViewController _controller;
+  late WidgetsBindingObserver _observer;
   bool _auto = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _observer = LifecycleEventHandler(
+      resumeCallBack: () async {
+        await _controller.evaluateJavascript(source: _script);
+        await _controller.loadUrl(urlRequest: URLRequest(url: _url));
+      },
+    );
+    WidgetsBinding.instance!.addObserver(_observer);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(_observer);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
