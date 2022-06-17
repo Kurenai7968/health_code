@@ -14,7 +14,7 @@ class _AppState extends State<App> {
       Uri.parse('https://app.ssm.gov.mo/healthPHD/page/index.html');
   late InAppWebViewController _controller;
   late WidgetsBindingObserver _observer;
-  bool _auto = true;
+  final bool _auto = true;
 
   @override
   void initState() {
@@ -60,23 +60,23 @@ class _AppState extends State<App> {
                     urlRequest: URLRequest(url: _url)),
                 child: const Icon(
                   Icons.refresh,
-                  color: Colors.white,
+                  color: Colors.grey,
                 ),
               ),
             ),
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: GestureDetector(
-                onTap: () async {
-                  await _controller.loadUrl(urlRequest: URLRequest(url: _url));
-                  setState(() {
-                    _auto = !_auto;
-                  });
-                },
-                child: Text(_auto ? 'AUTO' : 'MANUAL'),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 10,
+            //   right: 10,
+            //   child: GestureDetector(
+            //     onTap: () async {
+            //       await _controller.loadUrl(urlRequest: URLRequest(url: _url));
+            //       setState(() {
+            //         _auto = !_auto;
+            //       });
+            //     },
+            //     child: Text(_auto ? 'AUTO' : 'MANUAL'),
+            //   ),
+            // ),
           ],
         ),
       ),
