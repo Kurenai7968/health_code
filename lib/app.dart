@@ -60,7 +60,7 @@ class _AppState extends State<App> {
                     urlRequest: URLRequest(url: _url)),
                 child: const Icon(
                   Icons.refresh,
-                  color: Colors.grey,
+                  color: Colors.white,
                 ),
               ),
             ),
